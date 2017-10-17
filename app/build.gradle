@@ -1,34 +1,68 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+int MILLIS_IN_MINUTE = 1000 * 60
+int minutesSinceEpoch = System.currentTimeMillis() / MILLIS_IN_MINUTE
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
     defaultConfig {
-        applicationId "com.toan_itc.baoonline"
-        minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        applicationId build_versions.app_id
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode build_versions.versionCode
+        versionName build_versions.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
+            debuggable true
             minifyEnabled false
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dexOptions {
+        preDexLibraries true
+        javaMaxHeapSize "12g"
+    }
+    applicationVariants.all { variant ->
+        if (variant.buildType.name == "release") {
+            variant.mergedFlavor.versionCode = minutesSinceEpoch;
+            variant.mergedFlavor.versionName = minutesSinceEpoch + "-" + variant.flavorName;
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    // Kotlin
+    implementation deps.kotlin.stdlib
+    // Support libraries
+    for (dependency in deps.support) {
+        implementation dependency.value
+    }
+    //Core
+    for (dependency in deps.core) {
+        implementation dependency.value
+    }
+    //Retrofit
+    for (dependency in deps.retrofit) {
+        implementation dependency.value
+    }
+    // Architecture components
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    implementation deps.lifecycle.java8
+    kapt deps.lifecycle.compiler
+    // Dagger 2
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.compiler
 }
