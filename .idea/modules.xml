@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/BaoOnine/BaoOnine.iml" filepath="$PROJECT_DIR$/BaoOnine/BaoOnine.iml" />
       <module fileurl="file://$PROJECT_DIR$/BaoOnlineV2.iml" filepath="$PROJECT_DIR$/BaoOnlineV2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Core/Core.iml" filepath="$PROJECT_DIR$/Core/Core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BaoOnine/app.iml" filepath="$PROJECT_DIR$/BaoOnine/app.iml" />
     </modules>
   </component>
 </project>
