@@ -1,5 +1,6 @@
 package com.toan_itc.baoonline
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -10,8 +11,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.toan_itc.baoonline.model.Repo
+import com.toan_itc.baoonline.network.Status
+import com.toan_itc.baoonline.viewmodel.RepoViewModel
+import kotlinx.android.synthetic.main.activity_test.*
 import javax.inject.Inject
-
 /**
  * Created by Toan.IT on 10/19/17.
  * Email:Huynhvantoan.itc@gmail.com
@@ -27,7 +31,7 @@ class TestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_test)
         repoViewModel = ViewModelProviders.of(this, viewModelFactory).get(RepoViewModel::class.java)
 
         val reposAdapter = ReposAdapter(this, ArrayList())

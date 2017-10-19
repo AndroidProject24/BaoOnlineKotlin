@@ -16,13 +16,16 @@
 
 package com.toan_itc.baoonline.di
 
-import com.toan_itc.baoonline.MainActivity
-
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class MainActivityModule {
-    @ContributesAndroidInjector(modules = arrayOf(FragmentBuildersModule::class))
-    internal abstract fun contributeMainActivity(): MainActivity
+abstract class FragmentBuildersModule {
+   /* @ContributesAndroidInjector
+    internal abstract fun contributeRepoFragment(): RepoFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun contributeUserFragment(): UserFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun contributeSearchFragment(): SearchFragment*/
 }

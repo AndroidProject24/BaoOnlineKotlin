@@ -9,12 +9,14 @@ import com.toan_itc.baoonline.network.AbsentLiveData
 import com.toan_itc.baoonline.network.Resource
 import com.toan_itc.baoonline.repository.RepoRepository
 import java.util.*
+import javax.inject.Inject
 
 /**
  * Created by Toan.IT on 10/19/17.
  * Email:Huynhvantoan.itc@gmail.com
  */
-class RepoViewModel constructor(private val repository: RepoRepository):ViewModel() {
+class RepoViewModel
+@Inject constructor(private val repository: RepoRepository):ViewModel() {
 
     var currentRepoUser: String? = null
     val results: LiveData<Resource<List<Repo>>>

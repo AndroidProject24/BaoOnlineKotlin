@@ -1,47 +1,57 @@
-package com.snappymob.kotlincomponents.di
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import android.app.Application
-import android.arch.persistence.room.Room
-import com.snappymob.kotlincomponents.db.AppDb
-import com.snappymob.kotlincomponents.db.RepoDao
+package com.toan_itc.baoonline.di
+
+import com.toan_itc.baoonline.api.ApiService
 import com.toan_itc.baoonline.retrofit.LiveDataCallAdapterFactory
-import com.toan_itc.baoonline.retrofit.WebService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-/**
- * https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample/app/src/main/java/com/android/example/github/di
- * TODO: Modify dependencies here!
- */
+
 @Module(includes = arrayOf(ViewModelModule::class))
 internal class AppModule {
-
     @Singleton
     @Provides
-    fun provideGithubService(): WebService {
+    fun provideGithubService(): ApiService {
         return Retrofit.Builder()
-                //TODO: Update Api URL
                 .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .build()
-                .create(WebService::class.java)
+                .create(ApiService::class.java)
+    }
+
+    /*@Singleton
+    @Provides
+    fun provideDb(app: Application): GithubDb {
+        return Room.databaseBuilder(app, GithubDb::class.java, "github.db").build()
     }
 
     @Singleton
     @Provides
-    fun provideDb(app: Application): AppDb {
-        //TODO: Update Database name
-        return Room.databaseBuilder(app, AppDb::class.java, "app-db").build()
+    fun provideUserDao(db: GithubDb): UserDao {
+        return db.userDao()
     }
-
 
     @Singleton
     @Provides
-    fun provideRepoDao(db: AppDb): RepoDao {
+    fun provideRepoDao(db: GithubDb): RepoDao {
         return db.repoDao()
-    }
-
+    }*/
 }

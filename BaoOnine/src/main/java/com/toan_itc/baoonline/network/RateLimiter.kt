@@ -5,13 +5,16 @@ import android.support.v4.util.ArrayMap
 import java.util.concurrent.TimeUnit
 
 /**
- * Created by ahmedrizwan on 9/9/17.
- * Helper class for managing refresh rate
- * link: https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample
+ * Created by Toan.IT on 10/19/17.
+ * Email:Huynhvantoan.itc@gmail.com
  */
 class RateLimiter<KEY>(timeout: Int, timeUnit: TimeUnit) {
     private val timestamps = ArrayMap<KEY, Long>()
-    private val timeout: Long = timeUnit.toMillis(timeout.toLong())
+    private val timeout: Long
+
+    init {
+        this.timeout = timeUnit.toMillis(timeout.toLong())
+    }
 
     @Synchronized
     fun shouldFetch(key: KEY): Boolean {

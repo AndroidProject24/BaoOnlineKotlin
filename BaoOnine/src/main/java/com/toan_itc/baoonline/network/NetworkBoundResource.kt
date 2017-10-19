@@ -1,3 +1,5 @@
+@file:Suppress("LeakingThis")
+
 package com.toan_itc.baoonline.network
 
 import android.support.annotation.MainThread
@@ -12,7 +14,6 @@ abstract class NetworkBoundResource<ResultType, RequestType> @MainThread
 constructor(private val appThreadExecutors: AppThreadExecutors) {
 
     private val result = PublishSubject.create<Resource<ResultType>>()
-
     init {
         val dbSource = loadFromDb()
         dbSource.subscribeOn(Schedulers.io())

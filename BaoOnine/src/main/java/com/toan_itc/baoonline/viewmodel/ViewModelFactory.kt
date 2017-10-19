@@ -3,14 +3,16 @@ package com.toan_itc.baoonline.viewmodel
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.support.v4.util.ArrayMap
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by Toan.IT on 10/19/17.
  * Email:Huynhvantoan.itc@gmail.com
  */
-
+@Singleton
 class ViewModelFactory
-constructor(private val creators: ArrayMap<Class<out ViewModel>, ViewModel>) : ViewModelProvider.Factory {
+@Inject constructor(private val creators: ArrayMap<Class<out ViewModel>, ViewModel>) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         var creator: ViewModel? = creators[modelClass]

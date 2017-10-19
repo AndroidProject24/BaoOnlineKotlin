@@ -1,12 +1,17 @@
 package com.toan_itc.baoonline
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.toan_itc.baoonline.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+    override fun initViews() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun initData() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun setLayoutResourceID(): Int {
+        return R.layout.activity_main
     }
 }

@@ -3,36 +3,36 @@ package com.toan_itc.baoonline
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import com.snappymob.kotlincomponents.di.DaggerAppComponent
+import com.toan_itc.baoonline.di.AppInjector
 import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import javax.inject.Inject
 
 
-/**
- * Created by ahmedrizwan on 9/9/17.
- * Application class
- */
 class App : Application(), HasActivityInjector {
 
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    internal var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>? = null
 
-    override fun activityInjector(): AndroidInjector<Activity> {
+    override fun activityInjector(): DispatchingAndroidInjector<Activity>? {
         return dispatchingAndroidInjector
     }
-
     override fun onCreate() {
         super.onCreate()
-
-        //Instantiate Dagger
+        Realm.init(this)
+        Realm.setDefaultConfiguration(RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build())
+        /*//Instantiate Dagger
         DaggerAppComponent.builder()
                 .application(this)
                 .build()
-                .inject(this)
-
+                .inject(this)*/
+        if (BuildConfig.DEBUG) {
+            //Timber.plant(new Timber.DebugTree());
+        }
+        AppInjector.init(this);
 
         //Register activity lifeCycle callback listener for automatically injecting every activity
         //that launches

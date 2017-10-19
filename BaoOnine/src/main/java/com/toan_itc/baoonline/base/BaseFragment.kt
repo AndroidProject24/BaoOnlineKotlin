@@ -1,4 +1,4 @@
-package com.toan_itc.core.base
+package com.toan_itc.baoonline.base
 
 import android.os.Bundle
 import android.support.annotation.LayoutRes

@@ -1,7 +1,9 @@
 package com.toan_itc.baoonline.model
 
-import android.support.annotation.NonNull
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 
 /**
  * Created by ahmedrizwan on 9/9/17.
@@ -9,25 +11,33 @@ import com.google.gson.annotations.SerializedName
  * TODO: Update/Change/Add model classes in this package
  */
 
-class Repo(
-        var id: Int = 0,
-        @SerializedName("name")
-        var name: String = "",
+open class Repo : RealmObject() {
+
+        @PrimaryKey
+        var id: Int = 0
+
+        var name: String? = null
+
         @SerializedName("full_name")
-        var fullName: String? = "",
+        var fullName: String? = ""
+
         @SerializedName("description")
-        var description: String? = "",
-        @SerializedName("owner")
-        @NonNull
-        var owner: Owner = Owner(),
+        var description: String? = ""
+
+        var owner: Owner? = null
+
         @SerializedName("stargazers_count")
         var stars: Int = 0
-) {
-        class Owner(
-                @NonNull
-                @SerializedName("login")
-                var login: String = "",
-                @SerializedName("url")
-                var url: String? = ""
-        )
+
+}
+
+open class Owner : RealmObject() {
+        @Expose
+        @PrimaryKey
+        @SerializedName("login")
+        open var login: String? = null
+
+        @Expose
+        @SerializedName("url")
+        open var url: String? = null
 }
