@@ -1,3 +1,4 @@
+/*
 package com.toan_itc.baoonline
 
 import android.arch.lifecycle.Observer
@@ -16,10 +17,12 @@ import com.toan_itc.baoonline.network.Status
 import com.toan_itc.baoonline.viewmodel.RepoViewModel
 import kotlinx.android.synthetic.main.activity_test.*
 import javax.inject.Inject
+*/
 /**
  * Created by Toan.IT on 10/19/17.
  * Email:Huynhvantoan.itc@gmail.com
- */
+ *//*
+
 class TestActivity : AppCompatActivity() {
 
     @Inject
@@ -106,3 +109,4 @@ class TestActivity : AppCompatActivity() {
         }
     }
 }
+*/

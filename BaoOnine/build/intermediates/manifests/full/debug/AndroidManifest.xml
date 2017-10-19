@@ -8,8 +8,8 @@
         android:minSdkVersion="21"
         android:targetSdkVersion="26" />
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name="com.toan_itc.baoonline.App"
@@ -19,7 +19,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity android:name="com.toan_itc.baoonline.MainActivity" >
             <intent-filter>

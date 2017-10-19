@@ -1,4 +1,4 @@
-package com.snappymob.kotlincomponents.retrofit
+package com.toan_itc.baoonline.retrofit
 
 import android.arch.lifecycle.LiveData
 import com.toan_itc.baoonline.api.ApiResponse

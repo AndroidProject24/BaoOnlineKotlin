@@ -13,13 +13,13 @@ import javax.inject.Inject
  * Email:Huynhvantoan.itc@gmail.com
  */
 
-abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
+abstract class BaseActivity : AppCompatActivity(),HasSupportFragmentInjector{
 
     @Inject
     internal var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>? = null
-    @Inject
+    /*@Inject
     internal var navigationController: NavigationController? = null
-
+*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(setLayoutResourceID())

@@ -6,15 +6,15 @@ package com.toan_itc.baoonline.network
 </T> */
 class Resource<T>(val status: Int, val data: T?, val message: String?) {
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
             return true
         }
-        if (o == null || javaClass != o.javaClass) {
+        if (other == null || javaClass != other.javaClass) {
             return false
         }
 
-        val resource = o as Resource<*>?
+        val resource = other as Resource<*>?
         if (status != resource!!.status){
             return false
         }

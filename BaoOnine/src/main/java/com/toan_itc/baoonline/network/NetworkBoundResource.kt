@@ -10,7 +10,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
-abstract class NetworkBoundResource<ResultType, RequestType> @MainThread
+abstract class NetworkBoundResource<ResultType, RequestType>
+@MainThread
 constructor(private val appThreadExecutors: AppThreadExecutors) {
 
     private val result = PublishSubject.create<Resource<ResultType>>()

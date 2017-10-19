@@ -1,3 +1,4 @@
+/*
 package com.toan_itc.baoonline.base
 
 import android.support.v4.app.FragmentManager
@@ -18,7 +19,8 @@ constructor(mainActivity: MainActivity) {
         this.fragmentManager = mainActivity.supportFragmentManager
     }
 
-   /* fun navigateToSearch() {
+   */
+/* fun navigateToSearch() {
         val searchFragment = SearchFragment()
         fragmentManager.beginTransaction()
                 .replace(containerId, searchFragment)
@@ -41,5 +43,7 @@ constructor(mainActivity: MainActivity) {
                 .replace(containerId, userFragment, tag)
                 .addToBackStack(null)
                 .commitAllowingStateLoss()
-    }*/
+    }*//*
+
 }
+*/

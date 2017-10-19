@@ -1,7 +1,6 @@
 package com.toan_itc.baoonline.retrofit
 
 import android.arch.lifecycle.LiveData
-import com.snappymob.kotlincomponents.retrofit.LiveDataCallAdapter
 import com.toan_itc.baoonline.api.ApiResponse
 import retrofit2.CallAdapter
 import retrofit2.Retrofit

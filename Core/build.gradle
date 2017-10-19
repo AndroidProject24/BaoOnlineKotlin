@@ -41,7 +41,7 @@ android {
         preDexLibraries true
         javaMaxHeapSize "12g"
     }
-    kapt { generateStubs = true }
+    //kapt { generateStubs = true }
 }
 
 dependencies {
@@ -60,3 +60,4 @@ dependencies {
         implementation dependency.value
     }
 }
+

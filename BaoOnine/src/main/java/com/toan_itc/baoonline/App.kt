@@ -20,6 +20,7 @@ class App : Application(), HasActivityInjector {
     override fun activityInjector(): DispatchingAndroidInjector<Activity>? {
         return dispatchingAndroidInjector
     }
+
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
