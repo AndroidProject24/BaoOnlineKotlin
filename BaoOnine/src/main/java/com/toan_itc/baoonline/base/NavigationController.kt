@@ -1,33 +1,29 @@
-/*
 package com.toan_itc.baoonline.base
 
 import android.support.v4.app.FragmentManager
-
-import com.toan_itc.baoonline.MainActivity
 import com.toan_itc.baoonline.R
-
+import com.toan_itc.baoonline.ui.main.MainFragment
 import javax.inject.Inject
 
 class NavigationController
 @Inject
-constructor(mainActivity: MainActivity) {
+constructor(baseActivity: BaseActivity) {
     private val containerId: Int
     private val fragmentManager: FragmentManager
 
     init {
         this.containerId = R.id.container
-        this.fragmentManager = mainActivity.supportFragmentManager
+        this.fragmentManager = baseActivity.supportFragmentManager
     }
 
-   */
-/* fun navigateToSearch() {
-        val searchFragment = SearchFragment()
+    fun navigateToMain() {
+        val mainFragment = MainFragment()
         fragmentManager.beginTransaction()
-                .replace(containerId, searchFragment)
+                .replace(containerId, mainFragment)
                 .commitAllowingStateLoss()
     }
 
-    fun navigateToRepo(owner: String, name: String) {
+    /*fun navigateToRepo(owner: String, name: String) {
         val fragment = RepoFragment.create(owner, name)
         val tag = "repo/$owner/$name"
         fragmentManager.beginTransaction()
@@ -43,7 +39,5 @@ constructor(mainActivity: MainActivity) {
                 .replace(containerId, userFragment, tag)
                 .addToBackStack(null)
                 .commitAllowingStateLoss()
-    }*//*
-
+    }*/
 }
-*/

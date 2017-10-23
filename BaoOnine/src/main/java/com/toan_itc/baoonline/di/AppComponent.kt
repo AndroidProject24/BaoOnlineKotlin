@@ -1,7 +1,7 @@
 package com.toan_itc.baoonline.di
 
 import android.app.Application
-import com.toan_itc.baoonline.App
+import com.toan_itc.baoonline.BaseApp
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -18,5 +18,5 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(app: App)
+    fun inject(app: BaseApp)
 }

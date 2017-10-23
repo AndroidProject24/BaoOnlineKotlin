@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'realm-android'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -24,6 +25,9 @@ android {
                 throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
             }
         }
+    }
+    kapt {
+        correctErrorTypes = true
     }
     buildTypes {
         debug {
@@ -59,5 +63,6 @@ dependencies {
     for (dependency in deps.retrofit) {
         implementation dependency.value
     }
+    kapt deps.realm_processor
 }
 

@@ -1,9 +1,5 @@
 package com.toan_itc.baoonline.network
 
-/**
- * A generic class that holds a value with its loading status.
- * @param <T>
-</T> */
 class Resource<T>(val status: Int, val data: T?, val message: String?) {
 
     override fun equals(other: Any?): Boolean {

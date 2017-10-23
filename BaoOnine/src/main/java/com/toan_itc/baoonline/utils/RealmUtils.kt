@@ -12,4 +12,4 @@ import io.realm.RealmResults
  */
 fun Realm.repoDao(): RepoDao = RepoDao(this)
 
-fun <T:RealmModel> RealmResults<T>.asLiveData() = LiveRealmData(this)
+fun <T: RealmModel> RealmResults<T>.asLiveData() = LiveRealmData(this)

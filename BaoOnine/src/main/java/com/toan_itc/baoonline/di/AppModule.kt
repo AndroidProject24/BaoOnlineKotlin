@@ -1,9 +1,11 @@
 package com.toan_itc.baoonline.di
 
 import com.toan_itc.baoonline.api.ApiService
+import com.toan_itc.baoonline.db.RepoDao
 import com.toan_itc.baoonline.retrofit.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import io.realm.Realm
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -12,7 +14,7 @@ import javax.inject.Singleton
 internal class AppModule {
     @Singleton
     @Provides
-    fun provideGithubService(): ApiService {
+    fun provideApiService(): ApiService {
         return Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -20,7 +22,11 @@ internal class AppModule {
                 .build()
                 .create(ApiService::class.java)
     }
-
+    @Singleton
+    @Provides
+    fun provideRepoDao(realm : Realm): RepoDao {
+        return RepoDao(realm)
+    }
     /*@Singleton
     @Provides
     fun provideDb(app: Application): GithubDb {
@@ -33,9 +39,5 @@ internal class AppModule {
         return db.userDao()
     }
 
-    @Singleton
-    @Provides
-    fun provideRepoDao(db: GithubDb): RepoDao {
-        return db.repoDao()
-    }*/
+   */
 }
