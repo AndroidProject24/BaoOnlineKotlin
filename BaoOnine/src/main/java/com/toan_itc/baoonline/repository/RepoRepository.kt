@@ -1,14 +1,15 @@
 package com.toan_itc.baoonline.repository
 
-import android.support.annotation.Nullable
+import android.arch.lifecycle.LiveData
+import com.toan_itc.baoonline.api.ApiResponse
+import com.toan_itc.baoonline.api.ApiService
 import com.toan_itc.baoonline.db.RepoDao
 import com.toan_itc.baoonline.model.Repo
-import com.toan_itc.baoonline.network.AppThreadExecutors
 import com.toan_itc.baoonline.network.NetworkBoundResource
 import com.toan_itc.baoonline.network.RateLimiter
 import com.toan_itc.baoonline.network.Resource
-import com.toan_itc.baoonline.retrofit.WebService
-import io.reactivex.Flowable
+import com.toan_itc.baoonline.utils.LiveRealmData
+import io.realm.RealmResults
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -20,33 +21,29 @@ import javax.inject.Singleton
 @Singleton
 class RepoRepository
 @Inject
-constructor(val repoDao: RepoDao, val webService: WebService, val appThreadExecutors: AppThreadExecutors) {
+constructor(val repoDao: RepoDao, val apiService: ApiService) {
     val repoListRateLimit = RateLimiter<String>(10, TimeUnit.MINUTES)
-
-    fun loadRepos(owner: String): Flowable<Resource<List<Repo>>> {
-        return object : NetworkBoundResource<List<Repo>, List<Repo>>(appThreadExecutors) {
+    fun loadRepos(owner: String): LiveData<Resource<RealmResults<Repo>>> {
+        return object : NetworkBoundResource<Repo, List<Repo>>() {
             override fun saveCallResult(item: List<Repo>) {
                 repoDao.insertRepos(item)
             }
 
-            override fun shouldFetch(@Nullable data: List<Repo>?): Boolean {
-                return (data == null || data.isEmpty()
-                        || repoListRateLimit.shouldFetch(owner))
+            override fun shouldFetch(data :RealmResults<Repo>?): Boolean {
+                return (data == null || data.isEmpty() || repoListRateLimit.shouldFetch(owner))
             }
 
-            override fun loadFromDb(): Flowable<List<Repo>> {
-                //return repoDao.loadRepositories(owner)
-                return webService.getRepos(owner)
+            override fun loadFromDb(): LiveRealmData<Repo> {
+                return repoDao.loadRepositories(owner)
             }
 
-            override fun createCall(): Flowable<List<Repo>> {
-                return webService.getRepos(owner)
+            override fun createCall(): LiveData<ApiResponse<List<Repo>>>  {
+                return apiService.getRepos(owner)
             }
 
             override fun onFetchFailed() {
                 repoListRateLimit.reset(owner)
             }
-        }.asFlowable()
+        }.asLiveData()
     }
-
 }

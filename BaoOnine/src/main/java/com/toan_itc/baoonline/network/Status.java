@@ -22,11 +22,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Status of a resource that is provided to the UI.
- * <p>
- * These are usually created by the Repository classes where they return
- * {@code LiveData<Resource<T>>} to pass back the latest data to the UI with its fetch status.
+ * Created by Toan.IT on 10/23/17.
+ * Email:Huynhvantoan.itc@gmail.com
  */
+
 @IntDef({Status.SUCCESS, Status.ERROR, Status.LOADING})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Status {

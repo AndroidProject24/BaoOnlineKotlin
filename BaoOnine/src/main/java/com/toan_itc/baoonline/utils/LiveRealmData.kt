@@ -6,8 +6,8 @@ import io.realm.RealmModel
 import io.realm.RealmResults
 
 /**
- * Created by ahmedrizwan on 9/18/17.
- * Realm as LiveData for observing changes
+ * Created by Toan.IT on 10/19/17.
+ * Email:Huynhvantoan.itc@gmail.com
  */
 class LiveRealmData<T : RealmModel>(private val results: RealmResults<T>) : LiveData<RealmResults<T>>() {
     private val listener = RealmChangeListener<RealmResults<T>> {

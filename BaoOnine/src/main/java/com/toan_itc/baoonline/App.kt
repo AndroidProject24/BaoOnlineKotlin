@@ -24,9 +24,8 @@ class App : Application(), HasActivityInjector {
             //Timber.plant(new Timber.DebugTree());
         }
     }
-
-    override fun activityInjector(): DispatchingAndroidInjector<Activity>? {
-        return dispatchingAndroidInjector
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder().create(this)
     }
 }
 */
