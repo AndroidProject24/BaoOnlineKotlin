@@ -1,21 +1,21 @@
 package com.toan_itc.baoonline.network
 
-import com.toan_itc.baoonline.repository.RepoRepository
-import com.toan_itc.baoonline.viewmodel.RepoLiveData
+import android.arch.lifecycle.LiveData
 
 /**
- * Created by ahmedrizwan on 9/9/17.
- * Helper class for transmitting an empty LiveData - Pretty useful!
+ * Created by Toan.IT on 10/23/17.
+ * Email:Huynhvantoan.itc@gmail.com
  */
-class AbsentLiveData
-private constructor(repository: RepoRepository, string: String) : RepoLiveData(repository, string) {
+
+class AbsentLiveData<T>
+private constructor() : LiveData<T>() {
     init {
         postValue(null)
     }
 
     companion object {
-        fun create(repository: RepoRepository): AbsentLiveData {
-            return AbsentLiveData(repository, "")
+        fun <T> create(): LiveData<T> {
+            return AbsentLiveData()
         }
     }
 }

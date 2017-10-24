@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'realm-android'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -63,6 +63,5 @@ dependencies {
     for (dependency in deps.retrofit) {
         implementation dependency.value
     }
-    kapt deps.realm_processor
 }
 

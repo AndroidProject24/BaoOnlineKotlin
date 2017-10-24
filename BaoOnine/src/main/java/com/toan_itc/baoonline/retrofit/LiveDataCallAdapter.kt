@@ -10,10 +10,10 @@ import java.lang.reflect.Type
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
- * Created by ahmedrizwan on 9/9/17.
- * Live Data Call Adapter for Retrofit
- * link: https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample
+ * Created by Toan.IT on 10/23/17.
+ * Email:Huynhvantoan.itc@gmail.com
  */
+
 class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, LiveData<ApiResponse<R>>> {
 
     override fun responseType(): Type {
@@ -32,7 +32,7 @@ class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, Li
                         }
 
                         override fun onFailure(call: Call<R>, throwable: Throwable) {
-                            postValue(ApiResponse<R>(throwable))
+                            postValue(ApiResponse(throwable))
                         }
                     })
                 }
