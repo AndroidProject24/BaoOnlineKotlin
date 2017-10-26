@@ -11,14 +11,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.orhanobut.logger.Logger
 import com.toan_itc.baoonline.R
 import com.toan_itc.baoonline.base.BaseFragment
 import com.toan_itc.baoonline.di.Injectable
 import com.toan_itc.baoonline.model.Repo
 import com.toan_itc.baoonline.network.Status
 import com.toan_itc.baoonline.viewmodel.RepoViewModel
+import io.realm.RealmResults
 import kotlinx.android.synthetic.main.activity_test.*
-import java.util.*
 import javax.inject.Inject
 
 /**
@@ -50,7 +51,7 @@ class Test1Fragment : BaseFragment(), LifecycleOwner, Injectable {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val reposAdapter = ReposAdapter(activity, ArrayList())
+        val reposAdapter = ReposAdapter(activity, null)
         recyclerViewRepos.adapter = reposAdapter
         recyclerViewRepos.layoutManager = LinearLayoutManager(activity)
         setupSearchListener(reposAdapter, savedInstanceState)
@@ -65,11 +66,12 @@ class Test1Fragment : BaseFragment(), LifecycleOwner, Injectable {
             it?.let {
                 textViewError.visibility = View.GONE
                 progressBar.visibility = View.GONE
-                reposAdapter.updateDataSet(ArrayList())
+                reposAdapter.updateDataSet(null)
                 when (it.status) {
                     Status.SUCCESS -> {
+                        Logger.e("data="+it.data.toString())
                         recyclerViewRepos.visibility = View.VISIBLE
-                        reposAdapter.updateDataSet(it.data as ArrayList<Repo>)
+                        reposAdapter.updateDataSet(it.data as RealmResults<Repo>)
                     }
                     Status.ERROR -> {
                         textViewError.visibility = View.VISIBLE
@@ -90,30 +92,29 @@ class Test1Fragment : BaseFragment(), LifecycleOwner, Injectable {
         outState?.putString(USER_STATE_KEY, repoViewModel.currentRepoUser)
     }
 
-    internal class ReposAdapter(val context: Context, var repos: ArrayList<Repo>) : RecyclerView.Adapter<ReposAdapter.RepoItemViewHolder>() {
+    internal class ReposAdapter(val context: Context, var repos: RealmResults<Repo>?) : RecyclerView.Adapter<ReposAdapter.RepoItemViewHolder>() {
 
         override fun getItemCount(): Int {
-            return repos.size
+            return if (repos != null) repos!!.size else 0
         }
 
-        fun updateDataSet(data: ArrayList<Repo>) {
+        fun updateDataSet(data: RealmResults<Repo>?) {
             repos = data
             notifyDataSetChanged()
         }
 
         override fun onCreateViewHolder(p0: ViewGroup?, p1: Int): RepoItemViewHolder {
             val textView = TextView(context)
-
             return RepoItemViewHolder(textView)
         }
 
         override fun onBindViewHolder(p0: RepoItemViewHolder, p1: Int) {
-            p0.bind(repos[p1])
+            p0.bind(repos?.get(p1))
         }
 
         internal class RepoItemViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-            fun bind(repo: Repo) = with(itemView) {
-                (itemView as TextView).text = repo.name
+            fun bind(repo: Repo?) = with(itemView) {
+                (itemView as TextView).text = repo?.name
             }
         }
     }
