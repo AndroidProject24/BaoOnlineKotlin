@@ -1,31 +1,25 @@
-/*
 package com.toan_itc.baoonline
 
-import android.app.Activity
-import android.app.Application
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import com.toan_itc.baoonline.di.applyAutoInjector
+import dagger.android.support.DaggerApplication
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import javax.inject.Inject
 
 
-class App : Application(), HasActivityInjector {
+class App : DaggerApplication() {
 
-    @Inject
-    internal var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>? = null
+    override fun applicationInjector() = DaggerAppComponent.builder()
+            .application(this)
+            .build()
 
     override fun onCreate() {
         super.onCreate()
-        AppInjector.init(this)
+        applyAutoInjector()
         Realm.init(this)
         Realm.setDefaultConfiguration(RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build())
         if (BuildConfig.DEBUG) {
             //Timber.plant(new Timber.DebugTree());
         }
     }
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder().create(this)
-    }
+
 }
-*/

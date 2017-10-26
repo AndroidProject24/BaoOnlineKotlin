@@ -1,22 +1,22 @@
 package com.toan_itc.baoonline.di
 
-import android.app.Application
-import com.toan_itc.baoonline.BaseApp
+import com.toan_itc.baoonline.App
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(AndroidInjectionModule::class, AppModule::class, BaseActivityModule::class))
-interface AppComponent {
+@Component(modules = arrayOf(AndroidSupportInjectionModule::class, AppModule::class, BaseActivityModule::class))
+interface AppComponent : AndroidInjector<App> {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun application(application: Application): Builder
+        fun application(application: App): Builder
 
         fun build(): AppComponent
     }
 
-    fun inject(app: BaseApp)
+    override fun inject(app: App)
 }

@@ -7,7 +7,7 @@ import com.toan_itc.baoonline.base.BaseFragment
  * Created by Toan.IT on 10/22/17.
  * Email:Huynhvantoan.itc@gmail.com
  */
-public class MainFragment :BaseFragment(){
+class MainFragment :BaseFragment(){
     companion object {
         @JvmStatic
         fun create(): MainFragment {

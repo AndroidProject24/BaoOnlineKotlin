@@ -24,20 +24,14 @@ internal class AppModule {
     }
     @Singleton
     @Provides
-    fun provideRepoDao(realm : Realm): RepoDao {
-        return RepoDao(realm)
-    }
-    /*@Singleton
-    @Provides
-    fun provideDb(app: Application): GithubDb {
-        return Room.databaseBuilder(app, GithubDb::class.java, "github.db").build()
+    fun provideRepoDao(): RepoDao {
+        return RepoDao(provideRealm())
     }
 
+    @Provides
     @Singleton
-    @Provides
-    fun provideUserDao(db: GithubDb): UserDao {
-        return db.userDao()
+    fun provideRealm(): Realm {
+        return Realm.getDefaultInstance()
     }
 
-   */
 }

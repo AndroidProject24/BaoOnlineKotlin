@@ -1,6 +1,6 @@
 ext.deps = [:]
 def versions = [:]
-versions.android_gradle_plugin = "3.0.0-rc2"
+versions.android_gradle_plugin = "3.0.0"
 versions.realm_plugin = "4.1.0"
 //Support
 versions.arch = hasProperty("ARCH_VERSION") ? getProperty("ARCH_VERSION") : "1.0.0-rc1"

@@ -23,7 +23,7 @@ constructor(repository: RepoRepository) : ViewModel() {
     @VisibleForTesting
     internal val repoId: MutableLiveData<RepoId>
     val repo: LiveData<Resource<RealmResults<Repo>>>
-    //val contributors: LiveData<Resource<List<Contributor>>>
+    var currentRepoUser: String? = null
     private val query: MutableLiveData<String> = MutableLiveData()
     init {
         this.repoId = MutableLiveData()
@@ -42,6 +42,14 @@ constructor(repository: RepoRepository) : ViewModel() {
         }
     }
 
+    fun setQuery(originalInput: String?, force:Boolean) {
+        if(originalInput==null) return
+        val input = originalInput.toLowerCase(Locale.getDefault()).trim { it <= ' ' }
+        if (input == query.value && !force) {
+            return
+        }
+        query.value = input
+    }
     @VisibleForTesting
     fun setId(owner: String, name: String) {
         val update = RepoId(owner, name)

@@ -1,30 +1,34 @@
-/*
-package com.toan_itc.baoonline
+package com.toan_itc.baoonline.ui.home
 
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.toan_itc.baoonline.R
+import com.toan_itc.baoonline.base.BaseFragment
+import com.toan_itc.baoonline.di.Injectable
 import com.toan_itc.baoonline.model.Repo
 import com.toan_itc.baoonline.network.Status
 import com.toan_itc.baoonline.viewmodel.RepoViewModel
 import kotlinx.android.synthetic.main.activity_test.*
+import java.util.*
 import javax.inject.Inject
-*/
+
 /**
- * Created by Toan.IT on 10/19/17.
+ * Created by Toan.IT on 10/24/17.
  * Email:Huynhvantoan.itc@gmail.com
- *//*
-
-class TestActivity : AppCompatActivity() {
-
+ */
+class Test1Fragment : BaseFragment(), LifecycleOwner, Injectable {
+    companion object {
+        fun newInstance() = Test1Fragment()
+    }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -32,27 +36,32 @@ class TestActivity : AppCompatActivity() {
 
     private val USER_STATE_KEY = "UserName"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test)
-        repoViewModel = ViewModelProviders.of(this, viewModelFactory).get(RepoViewModel::class.java)
-
-        val reposAdapter = ReposAdapter(this, ArrayList())
-        recyclerViewRepos.adapter = reposAdapter
-        recyclerViewRepos.layoutManager = LinearLayoutManager(this)
-
-        //search click listener
-        setupSearchListener(reposAdapter, savedInstanceState)
+    override fun setLayoutResourceID(): Int {
+       return R.layout.activity_test;
     }
 
+    override fun initViews() {
+        repoViewModel = ViewModelProviders.of(this, viewModelFactory).get(RepoViewModel::class.java)
+    }
 
+    override fun initData() {
+
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val reposAdapter = ReposAdapter(activity, ArrayList())
+        recyclerViewRepos.adapter = reposAdapter
+        recyclerViewRepos.layoutManager = LinearLayoutManager(activity)
+        setupSearchListener(reposAdapter, savedInstanceState)
+    }
     private fun setupSearchListener(reposAdapter: ReposAdapter, savedInstanceState: Bundle?) {
         buttonSearch.setOnClickListener({
             repoViewModel.setQuery(editTextUser.text.toString(), reposAdapter.itemCount == 0)
         })
         val currentUserName = savedInstanceState?.get(USER_STATE_KEY) as String?
         repoViewModel.setQuery(currentUserName, reposAdapter.itemCount == 0)
-        repoViewModel.results.observe(this, Observer {
+        repoViewModel.repo.observe(this, Observer {
             it?.let {
                 textViewError.visibility = View.GONE
                 progressBar.visibility = View.GONE
@@ -81,7 +90,7 @@ class TestActivity : AppCompatActivity() {
         outState?.putString(USER_STATE_KEY, repoViewModel.currentRepoUser)
     }
 
-    class ReposAdapter(val context: Context, var repos: ArrayList<Repo>) : RecyclerView.Adapter<ReposAdapter.RepoItemViewHolder>() {
+    internal class ReposAdapter(val context: Context, var repos: ArrayList<Repo>) : RecyclerView.Adapter<ReposAdapter.RepoItemViewHolder>() {
 
         override fun getItemCount(): Int {
             return repos.size
@@ -102,11 +111,10 @@ class TestActivity : AppCompatActivity() {
             p0.bind(repos[p1])
         }
 
-        class RepoItemViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+        internal class RepoItemViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
             fun bind(repo: Repo) = with(itemView) {
                 (itemView as TextView).text = repo.name
             }
         }
     }
 }
-*/

@@ -12,16 +12,6 @@ import dagger.multibindings.IntoMap
 
 @Module
 internal abstract class ViewModelModule {
-    /* @Binds
-    @IntoMap
-    @ViewModelKey(UserViewModel.class)
-    abstract ViewModel bindUserViewModel(UserViewModel userViewModel);
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(SearchViewModel.class)
-    abstract ViewModel bindSearchViewModel(SearchViewModel searchViewModel);
-*/
     @Binds
     @IntoMap
     @ViewModelKey(RepoViewModel::class)

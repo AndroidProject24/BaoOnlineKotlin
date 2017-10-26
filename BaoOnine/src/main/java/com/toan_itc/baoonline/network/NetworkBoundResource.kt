@@ -45,7 +45,7 @@ internal constructor() {
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
             if (response!!.isSuccessful) {
-                ioThread {
+                //ioThread {
                     processResponse(response)?.let { saveCallResult(it) }
                     mainThread {
                         // we specially request a new live data,
@@ -54,7 +54,7 @@ internal constructor() {
                         result.addSource(loadFromDb(),
                                 { newData -> setValue(Resource.success(newData)) })
                     }
-                }
+               // }
             } else {
                 onFetchFailed()
                 result.addSource(dbSource)
