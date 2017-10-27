@@ -6,6 +6,10 @@ import com.toan_itc.core.utils.setContentFragment
 
 class MainActivity : BaseActivity() {
 
+    override fun setLayoutResourceID(): Int {
+        return R.layout.activity_main
+    }
+
     override fun initViews() {
         setContentFragment(R.id.container){ Test1Fragment.newInstance() }
     }
@@ -14,7 +18,4 @@ class MainActivity : BaseActivity() {
 
     }
 
-    override fun setLayoutResourceID(): Int {
-        return R.layout.activity_main
-    }
 }

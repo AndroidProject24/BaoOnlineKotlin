@@ -17,6 +17,7 @@ android {
         versionCode build_versions.versionCode
         versionName build_versions.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     signingConfigs {
         Key {
@@ -113,13 +114,21 @@ dependencies {
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.extensions
     implementation deps.lifecycle.java8
-    kapt deps.lifecycle.compiler
+    kapt           deps.lifecycle.compiler
     // Dagger 2
     implementation deps.dagger.runtime
     implementation deps.dagger.android
     implementation deps.dagger.android_support
-    kapt deps.dagger.android_support_compiler
-    kapt deps.dagger.compiler
+    kapt           deps.dagger.android_support_compiler
+    kapt           deps.dagger.compiler
+    //TikXml
+    implementation deps.tikxml.jsoup
+    implementation deps.tikxml.tikxml_retrofit
+    implementation deps.tikxml.tikxml_annotation
+    implementation deps.tikxml.tikxml_core
+    kapt           deps.tikxml.tikxml_processor
+    kapt           deps.tikxml.tikxml_auto_value
+
     api project(':Core')
 }
 
