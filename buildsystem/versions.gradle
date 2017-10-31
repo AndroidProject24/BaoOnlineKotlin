@@ -102,7 +102,7 @@ deps.realm_processor        = "io.realm:realm-annotations-processor:$versions.re
 ext.deps = deps
 
 def build_versions = [:]
-build_versions.app_id       ="com.toan_itc.baoonline"
+build_versions.app_id       = "com.toan_itc.baoonline"
 build_versions.min_sdk      = 21
 build_versions.target_sdk   = 26
 build_versions.build_tools  = "26.0.2"
@@ -111,14 +111,14 @@ build_versions.versionName  = "2.0.0"
 ext.build_versions = build_versions
 
 def key_store = [:]
-key_store.keystore          ="$rootProject.projectDir/buildsystem/toankey.jks"
+key_store.keystore          = "$rootProject.projectDir/buildsystem/toankey.jks"
 key_store.keystorePass      = "bambovip33"
 key_store.alias             = "vantoan"
 key_store.aliasPass         = "bambovip33"
-key_store.proguard_rules    ="$rootProject.projectDir/buildsystem/proguard-rules.pro"
-key_store.proguard_rx       ="$rootProject.projectDir/buildsystem/proguard-rx-rules.pro"
-key_store.proguard_square   ="$rootProject.projectDir/buildsystem/proguard-square.pro"
-key_store.proguard_support  ="$rootProject.projectDir/buildsystem/proguard-support.pro"
+key_store.proguard_rules    = "$rootProject.projectDir/buildsystem/proguard-rules.pro"
+key_store.proguard_rx       = "$rootProject.projectDir/buildsystem/proguard-rx-rules.pro"
+key_store.proguard_square   = "$rootProject.projectDir/buildsystem/proguard-square.pro"
+key_store.proguard_support  = "$rootProject.projectDir/buildsystem/proguard-support.pro"
 ext.key_store = key_store
 
 def addRepos(RepositoryHandler handler) {

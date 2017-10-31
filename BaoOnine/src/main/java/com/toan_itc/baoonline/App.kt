@@ -1,21 +1,11 @@
 package com.toan_itc.baoonline
 
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.orhanobut.logger.AndroidLogAdapter
-import com.orhanobut.logger.Logger
-import com.orhanobut.logger.PrettyFormatStrategy
-import com.toan_itc.baoonline.db.Migration
-import com.toan_itc.baoonline.di.applyAutoInjector
-import com.toan_itc.baoonline.utils.Constants
-import com.toan_itc.core.imageload.ImagePipelineConfigFactory
-import dagger.android.support.DaggerApplication
-import io.realm.Realm
-import io.realm.RealmConfiguration
+import android.app.Application
 
 
-class App : DaggerApplication() {
+class App:Application(){// : DaggerApplication() {
 
-    override fun applicationInjector() = DaggerAppComponent.builder()
+ /*   override fun applicationInjector() = DaggerAppComponent.builder()
             .application(this)
             .build()
 
@@ -54,5 +44,5 @@ class App : DaggerApplication() {
     private fun initFresco() {
         Fresco.initialize(this,ImagePipelineConfigFactory.getOkHttpImagePipelineConfig(this))
     }
-
+*/
 }

@@ -10,9 +10,7 @@ import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 
-
 interface Injectable
-
 fun Application.applyAutoInjector() = registerActivityLifecycleCallbacks(
     object : Application.ActivityLifecycleCallbacks {
 

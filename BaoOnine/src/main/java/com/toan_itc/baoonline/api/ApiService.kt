@@ -3,7 +3,6 @@ package com.toan_itc.baoonline.api
 import android.arch.lifecycle.LiveData
 import com.toan_itc.baoonline.model.Repo
 import retrofit2.http.GET
-import retrofit2.http.Path
 
 /**
  * Created by Toan.IT on 10/19/17.

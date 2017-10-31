@@ -1,3 +1,4 @@
+/*
 package com.toan_itc.baoonline.ui.home
 
 import android.arch.lifecycle.LifecycleOwner
@@ -22,10 +23,12 @@ import io.realm.RealmResults
 import kotlinx.android.synthetic.main.activity_test.*
 import javax.inject.Inject
 
+*/
 /**
  * Created by Toan.IT on 10/24/17.
  * Email:Huynhvantoan.itc@gmail.com
- */
+ *//*
+
 class Test1Fragment : BaseFragment(), LifecycleOwner, Injectable {
     companion object {
         fun newInstance() = Test1Fragment()
@@ -119,3 +122,4 @@ class Test1Fragment : BaseFragment(), LifecycleOwner, Injectable {
         }
     }
 }
+*/
