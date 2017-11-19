@@ -1,11 +1,67 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.Design.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="AppTheme_Fullscreen" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Medium</item>
+    </style>
 
+    <style name="TextAppearance.Text.Regular" parent="android:TextAppearance">
+        <item name="fontPath">fonts/SF-UI-Display-Regular.otf</item>
+    </style>
+
+    <style name="TextAppearance.Text.Medium" parent="android:TextAppearance">
+        <item name="fontPath">fonts/SF-UI-Display-Medium.otf</item>
+    </style>
+
+    <style name="TextAppearance.Text.Semibold" parent="android:TextAppearance">
+        <item name="fontPath">fonts/SF-UI-Display-Semibold.otf</item>
+    </style>
+
+    <style name="TextAppearance.Text.Bold" parent="android:TextAppearance">
+        <item name="fontPath">fonts/SF-UI-Display-Bold.otf</item>
+    </style>
+
+    <style name="TextAppearance.Text.Heavy" parent="android:TextAppearance">
+        <item name="fontPath">fonts/SF-UI-Display-Heavy.otf</item>
+    </style>
+
+    <style name="TextAppearance.Text.Black" parent="android:TextAppearance">
+        <item name="fontPath">fonts/SF-UI-Display-Black.otf</item>
+    </style>
+
+    <style name="TextAppearance.Text.Score" parent="android:TextAppearance">
+        <item name="fontPath">fonts/font_score.ttf</item>
+    </style>
+
+    <!--HOME-->
+    <style name="HomeTextStyle">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="TextStyle.HomeTitleSong" parent="HomeTextStyle">
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="android:maxWidth">255dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Medium</item>
+    </style>
+    <style name="TextStyle.HomeTitleSinger" parent="HomeTextStyle">
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Medium</item>
+    </style>
 </resources>

@@ -1,12 +1,15 @@
 ext.deps = [:]
 def versions = [:]
-versions.android_gradle_plugin = "3.0.0"
-versions.realm_plugin       = "4.1.0"
+versions.android_gradle_plugin = "3.1.0-alpha04"
+versions.realm_plugin          = "4.2.0"
 //Support
-versions.arch               = hasProperty("ARCH_VERSION") ? getProperty("ARCH_VERSION") : "1.0.0-rc1"
-versions.support            = "26.1.0"
+versions.arch               = hasProperty("ARCH_VERSION") ? getProperty("ARCH_VERSION") : "1.0.0"
+versions.support            = "27.0.1"
+versions.supportAnko        = "0.10.2"
 versions.kotlin             = "1.1.51"
+versions.mutidex            = "1.0.2"
 //Libraries :Core
+versions.calligraphy        = "2.3.0"
 versions.dagger             = "2.12"
 versions.constraint_layout  = "1.1.0-beta3"
 versions.logger             = "2.1.1"
@@ -17,12 +20,12 @@ versions.fresco             = "1.5.0"
 versions.retrofit           = "2.3.0"
 versions.okHttp             = "3.9.0"
 versions.okHttpLogging      = "2.0.3"
-versions.reactivenetwork    ="0.12.1"
+versions.reactivenetwork    = "0.12.1"
 //Libraries: Development
 versions.leakCanary         = "1.5.4"
 versions.blockcanary        = "1.5.0"
 versions.stetho             = "1.5.0"
-versions.realmStetho        ="2.1.0"
+versions.realmStetho        = "2.1.0"
 //Libraries :App
 versions.tikxml             ="0.8.13"
 versions.jsoup              ="1.10.3"
@@ -34,10 +37,25 @@ support.app_compat          = "com.android.support:appcompat-v7:$versions.suppor
 support.recyclerview        = "com.android.support:recyclerview-v7:$versions.support"
 support.cardview            = "com.android.support:cardview-v7:$versions.support"
 support.design              = "com.android.support:design:$versions.support"
+support.palette             = "com.android.support:palette-v7:$versions.support"
 support.constraint_layout   = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
 deps.support = support
 
+/*
+def supportAnko = [:]
+support.commons             = "org.jetbrains.anko:anko-appcompat-v7-commons:$versions.supportAnko"
+support.app_compat          = "org.jetbrains.anko:anko-appcompat-v7:$versions.supportAnko"
+support.compat_coroutines   = "org.jetbrains.anko:anko-coroutines:$versions.supportAnko"
+support.recyclerview        = "org.jetbrains.anko:anko-recyclerview-v7:$versions.supportAnko"
+support.recycler_coroutines = "org.jetbrains.anko:anko-recyclerview-v7-coroutines:$versions.supportAnko"
+support.cardview            = "org.jetbrains.anko:anko-cardview-v7:$versions.supportAnko"
+support.design              = "org.jetbrains.anko:anko-design:$versions.supportAnko"
+support.design_coroutines   = "org.jetbrains.anko:anko-design-coroutines:$versions.supportAnko"
+deps.supportAnko = supportAnko
+*/
+
 def core = [:]
+core.calligraphy            = "uk.co.chrisjenx:calligraphy:$versions.calligraphy"
 core.fresco                 = "com.facebook.fresco:fresco:$versions.fresco"
 core.frescoOkhttp           = "com.facebook.fresco:imagepipeline-okhttp3:$versions.fresco"
 core.rxjava2                = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
@@ -81,14 +99,26 @@ dagger.compiler             = "com.google.dagger:dagger-compiler:$versions.dagge
 dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
 deps.dagger = dagger
 
-def tikxml = [:]
-tikxml.tikxml_retrofit      = "com.tickaroo.tikxml:retrofit-converter:$versions.tikxml"
-tikxml.tikxml_annotation    = "com.tickaroo.tikxml:annotation:$versions.tikxml"
-tikxml.tikxml_core          = "com.tickaroo.tikxml:core:$versions.tikxml"
-tikxml.tikxml_processor     = "com.tickaroo.tikxml:processor:$versions.tikxml"
-tikxml.tikxml_auto_value    = "com.tickaroo.tikxml:auto-value-tikxml:$versions.tikxml"
-tikxml.jsoup                = "org.jsoup:jsoup:$versions.jsoup"
-deps.tikxml = tikxml
+def library = [:]
+library.exoplayer_core      = "com.google.android.exoplayer:exoplayer-core:$versions.exoPlayer"
+library.exoplayer_ui        = "com.google.android.exoplayer:exoplayer-ui:$versions.exoPlayer"
+library.filedownloader      = "com.liulishuo.filedownloader:library:$versions.filedownloader"
+deps.library = library
+
+def tikXml = [:]
+tikXml.tikxml_retrofit      = "com.tickaroo.tikxml:retrofit-converter:$versions.tikxml"
+tikXml.tikxml_annotation    = "com.tickaroo.tikxml:annotation:$versions.tikxml"
+tikXml.tikxml_core          = "com.tickaroo.tikxml:core:$versions.tikxml"
+tikXml.tikxml_processor     = "com.tickaroo.tikxml:processor:$versions.tikxml"
+tikXml.tikxml_auto_value    = "com.tickaroo.tikxml:auto-value-tikxml:$versions.tikxml"
+tikXml.jsoup                = "org.jsoup:jsoup:$versions.jsoup"
+deps.tikXml = tikXml
+
+def test = [:]
+test.leakcanary             = "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary"
+test.leakcanary_no_op       = "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakCanary"
+test.leakcanary_no_op       = "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakCanary"
+deps.test = test
 
 def kotlin = [:]
 kotlin.stdlib               = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
@@ -97,15 +127,16 @@ kotlin.plugin               = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versio
 deps.kotlin = kotlin
 
 deps.android_gradle_plugin  = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.databinding            = "com.android.databinding:compiler:$versions.android_gradle_plugin"
 deps.realm_plugin           = "io.realm:realm-gradle-plugin:$versions.realm_plugin"
 deps.realm_processor        = "io.realm:realm-annotations-processor:$versions.realm_plugin"
+deps.multidex               = "com.android.support:multidex:$versions.mutidex"
 ext.deps = deps
 
 def build_versions = [:]
 build_versions.app_id       = "com.toan_itc.baoonline"
 build_versions.min_sdk      = 21
-build_versions.target_sdk   = 26
-build_versions.build_tools  = "26.0.2"
+build_versions.target_sdk   = 27
 build_versions.versionCode  = 20
 build_versions.versionName  = "2.0.0"
 ext.build_versions = build_versions

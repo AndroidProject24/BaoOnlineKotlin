@@ -6,7 +6,6 @@ apply plugin: 'realm-android'
 
 android {
     compileSdkVersion build_versions.target_sdk
-    buildToolsVersion build_versions.build_tools
     defaultConfig {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
@@ -35,15 +34,20 @@ android {
             minifyEnabled false
         }
         release {
-            signingConfig signingConfigs.Key
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'),
-            key_store.proguard_rules,key_store.proguard_rx,key_store.proguard_square,key_store.proguard_support
+            postprocessing {
+                signingConfig signingConfigs.Key
+                removeUnusedCode false
+                removeUnusedResources false
+                obfuscate false
+                optimizeCode false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                        key_store.proguard_rules, key_store.proguard_rx, key_store.proguard_square, key_store.proguard_support
+            }
         }
     }
     dexOptions {
         preDexLibraries true
-        javaMaxHeapSize "12g"
+        javaMaxHeapSize "4g"
     }
     //kapt { generateStubs = true }
 }

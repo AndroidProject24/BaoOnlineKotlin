@@ -9,7 +9,6 @@ int minutesSinceEpoch = System.currentTimeMillis() / MILLIS_IN_MINUTE
 
 android {
     compileSdkVersion build_versions.target_sdk
-    buildToolsVersion build_versions.build_tools
     defaultConfig {
         applicationId build_versions.app_id
         minSdkVersion build_versions.min_sdk
@@ -38,10 +37,15 @@ android {
             minifyEnabled false
         }
         release {
-            signingConfig signingConfigs.Key
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'),
-            key_store.proguard_rules,key_store.proguard_rx,key_store.proguard_square,key_store.proguard_support
+            postprocessing {
+                signingConfig signingConfigs.Key
+                removeUnusedCode false
+                removeUnusedResources false
+                obfuscate false
+                optimizeCode false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                        key_store.proguard_rules,key_store.proguard_rx,key_store.proguard_square,key_store.proguard_support
+            }
         }
     }
     lintOptions {
@@ -96,6 +100,9 @@ android {
     }
 }
 dependencies {
+    implementation project(':Core')
+    // Data binding
+    kapt deps.databinding
     // Kotlin
     implementation deps.kotlin.stdlib
     // Support libraries
@@ -110,6 +117,13 @@ dependencies {
     for (dependency in deps.retrofit) {
         implementation dependency.value
     }
+    //TikXml
+    implementation deps.tikXml.jsoup
+    implementation deps.tikXml.tikxml_retrofit
+    implementation deps.tikXml.tikxml_annotation
+    implementation deps.tikXml.tikxml_core
+    kapt           deps.tikXml.tikxml_processor
+    kapt           deps.tikXml.tikxml_auto_value
     // Architecture components
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.extensions
@@ -121,14 +135,11 @@ dependencies {
     implementation deps.dagger.android_support
     kapt           deps.dagger.android_support_compiler
     kapt           deps.dagger.compiler
-    //TikXml
-    implementation deps.tikxml.jsoup
-    implementation deps.tikxml.tikxml_retrofit
-    implementation deps.tikxml.tikxml_annotation
-    implementation deps.tikxml.tikxml_core
-    kapt           deps.tikxml.tikxml_processor
-    kapt           deps.tikxml.tikxml_auto_value
+    //implementation 'com.android.support:multidex:1.0.2'
+    // Test
+    debugImplementation deps.test.leakcanary
+    releaseImplementation deps.test.leakcanary_no_op
+    testImplementation deps.test.leakcanary_no_op
 
-    api project(':Core')
 }
 

@@ -46,6 +46,7 @@ object ImagePipelineConfigFactory {
             val configBuilder = OkHttpImagePipelineConfigFactory.newBuilder(context, okHttpClient)
             configureCaches(configBuilder, context)
             configureLoggingListeners(configBuilder)
+            configureOptions(configBuilder)
             sOkHttpImagePipelineConfig = configBuilder.build()
         }
         return sOkHttpImagePipelineConfig

@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
-import com.toan_itc.baoonline.api.ApiResponse
-import com.toan_itc.baoonline.utils.LiveRealmData
+import com.toan_itc.baoonline.data.remote.api.ApiResponse
+import com.toan_itc.baoonline.ui.common.LiveRealmData
 import io.realm.RealmModel
 import io.realm.RealmResults
 import java.util.*
@@ -20,14 +20,14 @@ internal constructor() {
     init {
         result.setValue(Resource.loading(null))
         val dbSource = loadFromDb()
-        result.addSource(dbSource, { data ->
+        result.addSource(dbSource) { resultType ->
             result.removeSource(dbSource)
-            if (shouldFetch(data)) {
+            if (shouldFetch(resultType)) {
                 fetchFromNetwork(dbSource)
             } else {
-                result.addSource(dbSource, { newData -> setValue(Resource.success(newData)) })
+                result.addSource(dbSource) { newData -> setValue(Resource.success(newData)) }
             }
-        })
+        }
     }
 
     @MainThread
@@ -41,11 +41,11 @@ internal constructor() {
         val apiResponse = createCall()
         // we re-attach dbSource as a new source, it will dispatch its latest value quickly
         result.addSource(dbSource, { newData -> setValue(Resource.loading(newData)) })
-        result.addSource(apiResponse){ response ->
+        result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
             if (response!!.isSuccessful) {
-                //ioThread {
+                ioThread {
                     processResponse(response)?.let { saveCallResult(it) }
                     mainThread {
                         // we specially request a new live data,
@@ -54,11 +54,11 @@ internal constructor() {
                         result.addSource(loadFromDb(),
                                 { newData -> setValue(Resource.success(newData)) })
                     }
-               // }
+                }
             } else {
                 onFetchFailed()
                 result.addSource(dbSource)
-                        { newData -> result.value = response.errorMessage?.let { Resource.error(it, newData) } }
+                { newData -> result.value = response.errorMessage?.let { Resource.error(it, newData) } }
             }
         }
     }

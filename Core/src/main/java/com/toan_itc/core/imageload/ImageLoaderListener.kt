@@ -14,8 +14,8 @@ interface ImageLoaderListener {
 
     fun loadController(url: String, simpleDraweeView: SimpleDraweeView?, width: Int, height: Int, controllerListener: ControllerListener<Any>?)
 
-    fun loadController(url: String, simpleDraweeView: SimpleDraweeView?, width: Int, height: Int)
+    fun loadController(url: String, simpleDraweeView: SimpleDraweeView?, width: Float, height: Float)
 
-    fun loadHierarchy(url: String, simpleDraweeView: SimpleDraweeView?)
+    fun loadHierarchy(url: String, simpleDraweeView: SimpleDraweeView)
 
 }
